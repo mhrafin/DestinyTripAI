@@ -19,7 +19,9 @@ class QuestionnaireViewSet(viewsets.ModelViewSet):
         # Generate itinerary after questionnaire is created
         itinerary = ItineraryService().generate_itinerary(questionnaire.id)
         # Build response payload from serialized data, then add itinerary.
-        data = serializer.data.copy()
-        data["itinerary"] = itinerary
+        data = serializer.data
+        data["itinerary"] = (
+            itinerary.model_dump() if hasattr(itinerary, "model_dump") else itinerary
+        )
 
         return Response(data, status=status.HTTP_201_CREATED)
