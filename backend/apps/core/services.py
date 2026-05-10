@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from pydantic import BaseModel
-from datetime import time
 
 from .models import Questionnaire
 
@@ -22,6 +21,7 @@ class Activity(BaseModel):
 class Itinerary(BaseModel):
     day: int
     activities: list[Activity]
+    cost: float
 
 
 class Destination(BaseModel):
@@ -53,7 +53,8 @@ class ItineraryService:
         # logger.debug("Prompt built for questionnaire_id=%s chars=%s", questionnaire_id, len(prompt))
         response = self.client.responses.parse(
             model="gpt-5-nano-2025-08-07",
-            input=[{"role": "user", "content": prompt}],
+            instructions=prompt[1],
+            input=prompt[0],
             text_format=Destination,
             # max_tokens=1000,
         )
@@ -73,14 +74,27 @@ class ItineraryService:
         #     questionnaire.id,
         #     questionnaire.interests.count(),
         # )
-        prompt = (
-            f"Create a travel itinerary for a trip with the following details:\n"
-            f"- Travel Style: {questionnaire.travel_style}\n"
-            f"- Interests: {interests}\n"
-            f"- Duration: {questionnaire.duration} days\n"
-            f"- Budget: {questionnaire.budget} {questionnaire.currency}\n"
-            f"- Climate Preference: {questionnaire.climate_preference}\n"
-            f"- Departure City: {questionnaire.departure_city}\n"
-            f"Please provide a day-by-day itinerary with activities and destinations."
+
+        instruction = (
+            "You are an expert travel planner. Given a traveler profile, generate a detailed, personalized trip plan.\n"
+            f"Total trip cost must not exceed {questionnaire.budget} {questionnaire.currency} including estimated costs for flights, accommodations, activities, and meals.\n"
+            f"{'Destination can be anywhere in the world.' if questionnaire.abroad_trip_flex else 'Destination must be within the same country as departure city.'}\n"
+            f"Climate must match preference: {questionnaire.climate_preference}.\n"
+            f"All activities and recommendations must align with {questionnaire.travel_style} travel style.\n"
+            f"Tailor every day to these interests: {interests}\n"
         )
-        return prompt
+
+        input = (
+            f"Plan a trip for this traveler::\n"
+            f"Name: {questionnaire.name}\n"
+            f"Travel Style: {questionnaire.travel_style}\n"
+            f"Interests: {interests}\n"
+            f"Duration: {questionnaire.duration} days\n"
+            f"Budget: {questionnaire.budget} {questionnaire.currency}\n"
+            f"Climate Preference: {questionnaire.climate_preference}\n"
+            f"Departure City: {questionnaire.departure_city}\n"
+            f"Open to International Travel: {'Yes' if questionnaire.abroad_trip_flex else 'No, domestic only'}\n"
+        )
+        print("Instruction for OpenAI:", instruction)  # Debugging statement
+        print("Input for OpenAI:", input)  # Debugging statement
+        return input, instruction

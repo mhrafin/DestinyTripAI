@@ -40,6 +40,10 @@ class Questionnaire(models.Model):
     )
     departure_city = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+    abroad_trip_flex = models.BooleanField(
+        default=False,
+        help_text="Whether the user is open to international travel (abroad trips)",
+    )
 
     def __str__(self):
         return self.name
