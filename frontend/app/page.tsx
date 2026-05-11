@@ -1,7 +1,13 @@
-import Image from "next/image";
+// import {} from
 
 export default function Home() {
   return (
-    <div></div>
+    <section>
+      <div>
+        <h1 className="font-plus-jakarta-sans text-4xl">
+          What's your travel style?
+        </h1>
+      </div>
+    </section>
   );
 }
