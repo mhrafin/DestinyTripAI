@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-// import { inter, plusJakartaSans } from "./fonts";
-
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -28,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={` ${plusJakartaSans.variable} ${inter.className} h-full bg-background/50 antialiased`}
+      className={` ${plusJakartaSans.variable} ${inter.className} h-full bg-background antialiased`}
     >
       <body className="">{children}</body>
     </html>
