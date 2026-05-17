@@ -7,6 +7,7 @@ import {
 } from "@/lib/validations/questionnaire";
 import { StepOne } from "./StepOne";
 import { Button } from "../ui/button";
+import { StepTwo } from "./StepTwo";
 
 export function QuestionnaireForm() {
   const [step, setStep] = useState(1);
@@ -42,6 +43,7 @@ export function QuestionnaireForm() {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         {step === 1 && <StepOne />}
+        {step === 2 && <StepTwo />}
         {/* {step === 2 && (
           <StepTwo onNext={() => setStep(3)} onPrev={() => setStep(1)} />
         )} */}

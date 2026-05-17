@@ -26,7 +26,7 @@ export function StepOne() {
   return (
     <section>
       <div className="flex items-center justify-center pt-10">
-        <Card className="max-w-4xl text-center items-center gap-0">
+        <Card className="max-w-4xl min-w-[320px] text-center items-center gap-0">
           <h1 className="font-plus-jakarta-sans text-5xl font-bold mt-4">
             Trip Name
           </h1>
