@@ -23,7 +23,7 @@ export function QuestionnaireForm() {
   // Define which fields belong to which step
   const stepFields: Record<number, FieldName[]> = {
     1: ["name", "travel_style"],
-    2: ["interests", "duration"],
+    2: ["interests"],
     // etc...
   };
 
@@ -33,7 +33,10 @@ export function QuestionnaireForm() {
     const fieldsToValidate = stepFields[step as keyof typeof stepFields];
     const isValid = await methods.trigger(fieldsToValidate);
 
-    if (isValid) setStep((s) => s + 1);
+    if (isValid) {
+      console.log(`step ${step} data:`, methods.getValues());
+      setStep((s) => s + 1);
+    }
   };
 
   const onSubmit = (data: any) => {
