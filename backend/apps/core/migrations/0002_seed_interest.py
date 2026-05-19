@@ -5,15 +5,23 @@ from django.db import migrations
 
 def seed_interests(apps, schema_editor):
     Interest = apps.get_model("core", "Interest")
-    for name in ["Food", "Hiking", "Nightlife", "History", "Shopping", "Nature", "Beaches"]:
+    for name in [
+        "Food",
+        "Hiking",
+        "Nightlife",
+        "History",
+        "Shopping",
+        "Nature",
+        "Beach",
+        "Sports",
+        "Wildlife",
+    ]:
         Interest.objects.get_or_create(name=name)
 
 
-
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0001_initial'),
+        ("core", "0001_initial"),
     ]
 
     operations = [
