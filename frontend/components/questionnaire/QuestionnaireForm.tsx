@@ -8,6 +8,7 @@ import {
 import { StepOne } from "./StepOne";
 import { Button } from "../ui/button";
 import { StepTwo } from "./StepTwo";
+import { StepThree } from "./StepThree";
 
 export function QuestionnaireForm() {
   const [step, setStep] = useState(1);
@@ -47,6 +48,7 @@ export function QuestionnaireForm() {
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         {step === 1 && <StepOne />}
         {step === 2 && <StepTwo />}
+        {step === 3 && <StepThree />}
         {/* {step === 2 && (
           <StepTwo onNext={() => setStep(3)} onPrev={() => setStep(1)} />
         )} */}
