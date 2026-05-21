@@ -25,6 +25,7 @@ export function QuestionnaireForm() {
   const stepFields: Record<number, FieldName[]> = {
     1: ["name", "travel_style"],
     2: ["interests"],
+    3: ["duration", "budget", "climate_preference"],
     // etc...
   };
 
@@ -64,7 +65,7 @@ export function QuestionnaireForm() {
 
           {step < 4 ? (
             <div className="col-span-2 col-end-7 ">
-              <Button onClick={handleNext}>Continue</Button>
+              <Button type="button" onClick={handleNext}>Continue</Button>
             </div>
           ) : (
             <button type="submit">Submit</button>

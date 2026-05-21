@@ -17,7 +17,7 @@ import {
 export const InterestButton = (props) => {
   const { icon, label, isSelected, ...rest } = props;
   return (
-    <button {...rest}>
+    <button {...rest} type="button">
       <Card
         className={`flex items-center justify-center h-32 w-32 gap-4 bg-background hover:scale-102 hover:shadow-xl hover:bg-card ${isSelected ? "ring-4 rounded-4xl transition-all ring-black" : ""}`}
       >
@@ -31,7 +31,11 @@ export const InterestButton = (props) => {
 };
 
 export function StepTwo() {
-  const { watch, setValue } = useFormContext();
+  const {
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   const selectedInterests: Array<number> = watch("interests") || [];
 
@@ -112,6 +116,9 @@ export function StepTwo() {
               label={"Wildlife"}
             />
           </div>
+          {errors.interests && (
+            <p className="text-red-500">{errors.interests.message as string}</p>
+          )}
         </Card>
       </div>
     </section>

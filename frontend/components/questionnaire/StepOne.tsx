@@ -48,6 +48,7 @@ export function StepOne() {
           <div className="flex flex-col mt-6">
             <div className="flex flex-col md:flex-row items-center justify-center *:h-64">
               <button
+                type="button"
                 onClick={() =>
                   setValue("travel_style", "luxury", { shouldValidate: true })
                 }
@@ -73,6 +74,7 @@ export function StepOne() {
                 </Card>
               </button>
               <button
+                type="button"
                 onClick={() =>
                   setValue("travel_style", "adventure", {
                     shouldValidate: true,
@@ -100,6 +102,7 @@ export function StepOne() {
                 </Card>
               </button>
               <button
+                type="button"
                 onClick={() =>
                   setValue("travel_style", "cultural", { shouldValidate: true })
                 }
@@ -127,6 +130,7 @@ export function StepOne() {
 
             <div className="flex flex-col md:flex-row items-center justify-center *:h-64 ">
               <button
+                type="button"
                 onClick={() =>
                   setValue("travel_style", "relaxation", {
                     shouldValidate: true,
@@ -154,6 +158,7 @@ export function StepOne() {
                 </Card>
               </button>
               <button
+                type="button"
                 onClick={() =>
                   setValue("travel_style", "budget", { shouldValidate: true })
                 }

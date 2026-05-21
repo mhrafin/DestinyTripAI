@@ -10,10 +10,16 @@ export const questionnaireSchema = z.object({
     "cultural",
   ]),
   interests: z.array(z.number()).min(1), // Assume Interest ID array
-  duration: z.number().positive(),
-  budget: z.number().positive(),
-  currency: z.string().default("USD"),
-  climate_preference: z.enum(["tropical", "temperate", "cold", "arid", "any"]),
+  duration: z.coerce.number().positive(),
+  budget: z.string().min(1, "A budget is needed"),
+  climate_preference: z.enum([
+    "tropical",
+    "temperate",
+    "cold",
+    "arid",
+    "mediterranean",
+    "any",
+  ]),
   departure_city: z.string().min(1),
   abroad_trip_flex: z.boolean().default(false),
 });
