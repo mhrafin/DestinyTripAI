@@ -13,8 +13,15 @@ import {
   SportShoe,
   Panda,
 } from "lucide-react";
+import React from "react";
 
-export const InterestButton = (props) => {
+interface InterestButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  icon: React.ReactNode;
+  label: string;
+  isSelected?: boolean;
+}
+
+export const InterestButton = (props: InterestButtonProps) => {
   const { icon, label, isSelected, ...rest } = props;
   return (
     <button {...rest} type="button">

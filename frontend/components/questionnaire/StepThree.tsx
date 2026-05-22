@@ -6,7 +6,13 @@ import { Input } from "../ui/input";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 
-export const ClimateButton = (props) => {
+interface ClimateButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  imageSrc: string;
+  imagePosition?: string;
+}
+
+export const ClimateButton = (props: ClimateButtonProps) => {
   const { label, imageSrc, imagePosition, ...rest } = props;
   return (
     <button {...rest} type="button">
