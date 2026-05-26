@@ -7,168 +7,8 @@ import {
   PlaneTakeoff,
   Star,
 } from "lucide-react";
-import { cookies } from "next/headers";
 import Image from "next/image";
-
-const MOCK_TRIP_DATA = {
-  id: 28,
-  name: "Teegan Good",
-  travel_style: "budget",
-  duration: 3,
-  budget: "5000 USD",
-  climate_preference: "temperate",
-  departure_city: "Dhaka",
-  created_at: "2026-05-26T08:21:43.662886Z",
-  abroad_trip_flex: true,
-  interests: [4],
-  itinerary: {
-    name: "Istanbul",
-    country: "Turkey",
-    match_reason:
-      "Temperate climate in spring/fall and abundant, well-preserved history make Istanbul ideal for a 3-day budget-focused trip. Rich UNESCO sites, compact historic core, and affordable public transport support a budget-friendly, history-centric itinerary from Dhaka.",
-    top_attractions: [
-      "Hagia Sophia (Ayasofya)",
-      "Blue Mosque (Sultan Ahmed Mosque)",
-      "Topkapi Palace",
-      "Basilica Cistern",
-      "Grand Bazaar",
-      "Galata Tower",
-      "Bosphorus Cruise (short)",
-    ],
-    description:
-      "A compact 3-day budget-friendly exploration of Istanbul, focusing on its deep history and iconic monuments. Plan emphasizes temperate-season comfort (spring/fall) with efficient, affordable transit and wallet-friendly meals, while delivering a rich sense of the city’s Ottoman, Byzantine, and ancient roots.",
-    itinerary: [
-      {
-        day: 1,
-        day_title: "Arrival and Historic Core of Istanbul",
-        day_short_description:
-          "Settle in a budget-friendly hotel in Sultanahmet and begin with the city’s monumental history in the",
-        activities: [
-          {
-            name: "Arrival and Check-in at budget hotel in Sultanahmet",
-            time: "Morning",
-            description:
-              "Arrive from Dhaka and transfer to a budget-friendly hotel near the Historic Peninsula; drop bags and refresh.",
-          },
-          {
-            name: "Hagia Sophia",
-            time: "09:30–11:00",
-            description:
-              "Iconic monument with millennia of religious and architectural history; interior and exterior architecture overview.",
-          },
-          {
-            name: "Blue Mosque",
-            time: "11:15–12:00",
-            description:
-              "Historic mosque known for its six minarets and striking interior; plan modest dress and respectful conduct.",
-          },
-          {
-            name: "Lunch in Sultanahmet",
-            time: "12:30–13:30",
-            description:
-              "Budget-friendly Turkish fare (doner, kebab, or meze) near the historic core.",
-          },
-          {
-            name: "Basilica Cistern",
-            time: "14:00–15:00",
-            description:
-              "Atmospheric underground cistern with monumental columns and a hint of ancient engineering.",
-          },
-          {
-            name: "Grand Bazaar stroll",
-            time: "15:30–17:00",
-            description:
-              "Vibrant historic market district ideal for a low-cost taste of Istanbul’s commerce and crafts.",
-          },
-          {
-            name: "Dinner near Sultanahmet",
-            time: "19:00–21:00",
-            description:
-              "Affordable local restaurant or street-food options to cap the day.",
-          },
-        ],
-        cost: 114.0,
-      },
-      {
-        day: 2,
-        day_title: "Palace, Museums, and the Bosphorus",
-        day_short_description:
-          "Immerse in Ottoman history at Topkapi Palace and museums, followed by a short Bosphorus cruise to a水",
-        activities: [
-          {
-            name: "Topkapi Palace and Harem",
-            time: "09:30–12:30",
-            description:
-              "Ottoman sultans’ residence with treasury exhibits and panoramic views over the Golden Horn.",
-          },
-          {
-            name: "Istanbul Archaeology Museums",
-            time: "13:00–15:00",
-            description:
-              "Extensive collection spanning ancient Mesopotamian, Greek, and Anatolian civilizations.",
-          },
-          {
-            name: "Lunch break",
-            time: "15:15–16:00",
-            description:
-              "Budget-friendly meal in the Eminönü/Sultanahmet area.",
-          },
-          {
-            name: "Bosphorus Short Cruise",
-            time: "17:00–18:30",
-            description:
-              "Relaxing ferry ride along the Bosphorus to view Istanbul from the water and its palatial waterfronts.",
-          },
-          {
-            name: "Taksim & Istiklal Street stroll",
-            time: "19:00–21:00",
-            description:
-              "Evening walk through modern Istanbul with casual dining options.",
-          },
-        ],
-        cost: 124.0,
-      },
-      {
-        day: 3,
-        day_title: "Historical Neighborhoods and Departure",
-        day_short_description:
-          "Explore Galata, Karaköy, and the historic port vibe before departure.",
-        activities: [
-          {
-            name: "Galata Tower",
-            time: "09:00–10:00",
-            description:
-              "Panoramic views of the old city and harbor from the medieval tower.",
-          },
-          {
-            name: "Karaköy & Spice Market exploration",
-            time: "10:30–12:00",
-            description:
-              "Historic harbor district with street art, cafes, and markets; great for people-watching and architecture photos.",
-          },
-          {
-            name: "Lunch and last-minute shopping",
-            time: "12:30–14:00",
-            description:
-              "Budget-friendly street food and small souvenirs in the area.",
-          },
-          {
-            name: "Return to hotel and check-out",
-            time: "14:30–15:00",
-            description: "Retrieve luggage and prepare for airport transfer.",
-          },
-          {
-            name: "Flight back to Dhaka",
-            time: "Evening",
-            description:
-              "Depart Istanbul for Dhaka; reflect on three days of ancient and Ottoman history.",
-          },
-        ],
-        cost: 112.0,
-      },
-    ],
-  },
-};
+import LZString from "lz-string";
 
 async function getRelatedImage(query: string) {
   const res = await fetch(
@@ -199,16 +39,16 @@ export const ActivityCard = async ({
   return (
     <div className=" rounded-xl px-3 ">
       <div className="bg-white rounded-xl p-4 mb-4">
-        <div className="flex items-center  gap-2 ">
-          <div className="flex items-center gap-2  w-40">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-40 shrink-0">
             <Clock size={18} />
             <p className="text-sm">{time}</p>
           </div>
-          <div className="">
+          <div className="grow">
             <h4 className="text-lg font-semibold">{name}</h4>
             <p className="text-sm text-gray-500">{description}</p>
           </div>
-          <div className="relative w-40 h-30 rounded-xl overflow-hidden ml-auto">
+          <div className="relative w-40 h-32 rounded-xl overflow-hidden ml-auto shrink-0">
             <Image
               src={relatedImage?.photos?.[0]?.src?.landscape || ""}
               alt={name}
@@ -284,28 +124,62 @@ async function getCityImageSrc(query: string) {
   return res.json();
 }
 
-export default async function ResultPage() {
-  const cookieStore = await cookies();
-  const questionnaireData = cookieStore.get("questionnaireData")?.value;
-  console.log("Questionnaire Data from Cookies:", questionnaireData);
+export default async function ResultPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const compressedData = resolvedSearchParams.data;
 
-  let tripData = MOCK_TRIP_DATA;
+  let tripData: any = null;
 
-  if (questionnaireData) {
+  const fallbackData = "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-vnAB-pSBbKCgChgcC1FRW5Hs-ylZDq13IM5MACiSTpR+DuLA6ThBCEiPowhBswh00LMg5IJsjlYIxCVWylzcTILFJbOhYQn5BB7n3RSUz2F-BAAANTAEWBcgDzbT1snvG5YssAtm2KuNAoIhBzDHNsPl6rRLPGDgI3EU47l4F0OCPIpA4HUQAFbqDXDg1a3ZSAxJdR4sqXw0SNTOSyj5uB148gyGuMxB0CXkF9jyIgNiH4gHseY1hzi4VMOooFHUqqTZJgSSmxsvUFBQiut2JJRYdzSOUdip0wbcT1C5HGhxh1LHMGsak5A6TTCPyyeoHJ1I+Brh0L0YpzgD6EPKToKpJMamw1ppfXC1EKAQqhfy-qSZXEpFfou0mKDJlsKHp7cselLQYDtoFXQa5wHnyglyc2WBgrhjJPyYSTqq4m13Y8yQzydSvL1oYm2oEz6QRxC+k1P8k2QJMVOFgCD1CGAIMht4VtwW3odjC6ZCqMxklCIQDZ+JeBCKSPnNa6qoRchrBOHkuQQjTURsh5RqH0OwktfIE6eVAo+q3D4AhkaJC7vOge82r0wUSq7lKl+2bYUzLsK9c2BIhGI13XApIdyYxTnVbdfNEI+3uHUBkod6dckRHyRDIpVh7AzsLncQuhcgA";
+  let dataToUse = compressedData || fallbackData;
+
+  if (dataToUse) {
     try {
-      tripData = JSON.parse(questionnaireData);
-      console.log("Parsed Questionnaire Data:", tripData);
-      // Here you would typically send this data to your backend to get the trip recommendation
-      // For now, we will just log it and use the MOCK_TRIP_DATA
+      const decompressedData =
+        LZString.decompressFromEncodedURIComponent(dataToUse);
+      if (decompressedData) {
+        tripData = JSON.parse(decompressedData);
+        if (dataToUse === fallbackData) {
+          console.log("Trip data successfully retrieved from fallback.");
+        } else {
+          console.log("Trip data successfully retrieved from URL:", tripData);
+        }
+      } else {
+        if (dataToUse !== fallbackData) {
+           console.error("Failed to decompress data from URL. Using fallback.");
+           const fallbackDecompressed = LZString.decompressFromEncodedURIComponent(fallbackData);
+           if (fallbackDecompressed) {
+              tripData = JSON.parse(fallbackDecompressed);
+           }
+        }
+      }
     } catch (err) {
-      console.error("Error parsing questionnaire data from cookies:", err);
+      console.error("Error parsing trip data:", err);
     }
-  } else {
-    console.warn("No questionnaire data found in cookies.");
   }
 
-  const imageData = await getCityImageSrc(tripData?.itinerary?.name);
-  const imageUrl = imageData.photos?.[0]?.src?.landscape || "";
+  const imageData = tripData?.itinerary?.location
+    ? await getCityImageSrc(tripData.itinerary.location)
+    : null;
+  const imageUrl = imageData?.photos?.[0]?.src?.landscape || "";
+
+  if (!tripData?.itinerary) {
+    return (
+      <section className="bg-blue-50 min-h-screen flex items-center justify-center">
+        <div className="p-8 bg-white rounded-xl shadow-md text-center max-w-md">
+          <h2 className="text-2xl font-bold mb-4">No Itinerary Found</h2>
+          <p className="text-gray-600 mb-6">
+            We couldn't find an itinerary for this trip. It might still be
+            generating or there was an error.
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-blue-50 min-h-screen">
@@ -319,38 +193,40 @@ export default async function ResultPage() {
             alt={imageData.photos?.[0]?.alt}
             className="object-cover rounded-xl"
           />
-          <div className="grid grid-cols-3 bottom-0 z-20 w-full absolute text-white p-8">
-            <div className="grid col-span-2 gap-2 ">
-              <div className="bg-blue-900 w-fit rounded-xl p-1">
-                {tripData.travel_style.toUpperCase()} TRIP
+          <div className="flex justify-between items-end bottom-0 z-20 w-full absolute text-white p-8 gap-4">
+            <div className="flex flex-col gap-2 shrink">
+              <div className="bg-blue-900 w-fit rounded-xl p-1 px-2">
+                {tripData?.travel_style?.toUpperCase() || "UNKNOWN"} TRIP
               </div>
-              <p>{tripData.name}</p>
+              <p>{tripData?.name || "Trip"}</p>
               <div className="flex items-center gap-1">
                 <MapPin size={16} />
                 <p>{tripData.itinerary.location}</p>
               </div>
             </div>
-            <div>
-              <div className="text-black grid grid-cols-3 w-full rounded-xl bg-white p-3 ">
+            <div className="shrink-0">
+              <div className="text-black grid grid-cols-3 w-100 rounded-xl bg-white p-3 ">
                 <div className="flex flex-col justify-center">
                   <p>Duration</p>
                   <div className="flex items-center gap-1">
                     <Clock size={18} />
-                    <p className="text-sm">{tripData.duration} Days</p>
+                    <p className="text-sm">{tripData?.duration || 0} Days</p>
                   </div>
                 </div>
                 <div className="flex flex-col  items-center border-r border-l border-gray-400 px-3">
                   <p>Budget</p>
                   <div className="flex items-center gap-1">
                     <Banknote size={18} />
-                    <p className="text-sm">{tripData.budget}</p>
+                    <p className="text-sm">{tripData?.budget || "N/A"}</p>
                   </div>
                 </div>
                 <div className="pl-3 text-right flex flex-col justify-center">
                   <p>Departing</p>
                   <div className="flex items-center gap-1 justify-end">
                     <PlaneTakeoff size={18} />
-                    <p className="text-sm">{tripData.departure_city}</p>
+                    <p className="text-sm">
+                      {tripData?.departure_city || "Unknown"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -380,9 +256,11 @@ export default async function ResultPage() {
                 <h2 className="text-lg font-bold">Top Attractions</h2>
               </div>
               <ul className="list-disc list-inside text-gray-600 text-sm">
-                {tripData.itinerary.top_attractions.map((attraction, index) => (
-                  <li key={index}>{attraction}</li>
-                ))}
+                {tripData.itinerary.top_attractions?.map(
+                  (attraction: string, index: number) => (
+                    <li key={index}>{attraction}</li>
+                  ),
+                )}
               </ul>
             </div>
           </div>
@@ -393,16 +271,18 @@ export default async function ResultPage() {
           <div className="border-b border-gray-400 w-full h-0 self-center"></div>
         </div>
         {/* Based on number of days, there will that many ItineraryCard */}
-        {Array.from({ length: tripData.duration }, (_, i) => (
+        {Array.from({ length: tripData.duration || 0 }, (_, i) => (
           <ItineraryCard
             key={i}
             day={i + 1}
-            day_title={tripData.itinerary.itinerary[i]?.day_title}
-            day_short_description={
-              tripData.itinerary.itinerary[i]?.day_short_description
+            day_title={
+              tripData.itinerary.itinerary?.[i]?.day_title || `Day ${i + 1}`
             }
-            activities={tripData.itinerary.itinerary[i]?.activities || []}
-            cost={tripData.itinerary.itinerary[i]?.cost || 0}
+            day_short_description={
+              tripData.itinerary.itinerary?.[i]?.day_short_description || ""
+            }
+            activities={tripData.itinerary.itinerary?.[i]?.activities || []}
+            cost={tripData.itinerary.itinerary?.[i]?.cost || 0}
           />
         ))}
         {/* <pre>{JSON.stringify(imageData, null, 2)}</pre> */}

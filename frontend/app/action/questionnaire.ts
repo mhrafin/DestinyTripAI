@@ -1,11 +1,10 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import LZString from "lz-string";
 
 export async function submitQuestionnaire(data: any) {
   const res = await fetch(`${process.env.API_URL}/api/questionnaires/`, {
-    // Replace endpoint
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -18,12 +17,11 @@ export async function submitQuestionnaire(data: any) {
     );
   }
   const resultData = await res.json();
+  console.log("Received result data from DRF:", resultData);
 
-  (await cookies()).set("questionnaireData", JSON.stringify(resultData), {
-    maxAge: 60 * 60,
-    httpOnly: true,
-    path: "/",
-  });
+  const jsonString = JSON.stringify(resultData);
+  console.log("Stringified result data:", jsonString);
+  const compressedData = LZString.compressToEncodedURIComponent(jsonString);
 
-  redirect("/result");
+  redirect(`/result?data=${compressedData}`);
 }
