@@ -14,6 +14,7 @@ import { StepFour } from "./StepFour";
 import { LinearProgressWithLabelAndValue } from "../ui/linear-progress-with-label";
 import React from "react";
 import { submitQuestionnaire } from "@/app/action/questionnaire";
+import CircularIndeterminate from "@mui/material/CircularProgress";
 
 export function QuestionnaireForm() {
   const [progress, setProgress] = React.useState(0);
@@ -92,15 +93,22 @@ export function QuestionnaireForm() {
         {step === 4 && <StepFour />}
         {step === 5 && (
           <div className="mx-auto  h-screen max-w-2xl ">
-            <LinearProgressWithLabelAndValue value={progress} />
+            {/* <LinearProgressWithLabelAndValue value={progress} /> */}
+            {/* In the middle of the screen */}
+            <div className="flex flex-col items-center justify-center h-full gap-6">
+              <CircularIndeterminate />
+              <p className="text-xl font-medium">
+                Planning your perfect trip...
+              </p>
+            </div>
           </div>
         )}
 
         {/* Render Footer Buttons based on step */}
         {step < 5 && (
-          <div className="grid grid-cols-6 max-w-4xl text-center items-center justify-center mx-auto pt-6">
+          <div className="grid grid-cols-2 max-w-2xl text-center items-center justify-center mx-auto pt-6">
             {step > 1 && (
-              <div className="col-span-2 col-start-1">
+              <div className="col-start-1">
                 <Button type="button" onClick={handlePrev}>
                   Previous
                 </Button>
@@ -108,13 +116,13 @@ export function QuestionnaireForm() {
             )}
 
             {step < 4 ? (
-              <div className="col-span-2 col-end-7 ">
+              <div className="col-start-2">
                 <Button type="button" onClick={handleNext}>
                   Continue
                 </Button>
               </div>
             ) : (
-              <div className="col-span-2 col-end-7">
+              <div className="col-start-2">
                 <Button type="submit" onSubmit={onSubmit}>
                   Submit
                 </Button>

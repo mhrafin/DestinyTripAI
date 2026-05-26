@@ -28,7 +28,7 @@ export function StepOne() {
       <div className="flex items-center justify-center pt-10">
         <Card className="max-w-4xl min-w-[320px] text-center items-center gap-0">
           <h1 className="font-plus-jakarta-sans text-5xl font-bold mt-4">
-            Trip Name
+            Name Your Trip
           </h1>
           <Input
             {...register("name")}
