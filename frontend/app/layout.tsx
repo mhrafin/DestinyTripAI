@@ -28,7 +28,14 @@ export default function RootLayout({
       lang="en"
       className={` ${plusJakartaSans.variable} ${inter.className} h-full bg-background antialiased`}
     >
-      <body className="">{children}</body>
+      <body className="min-h-full flex flex-col bg-blue-50">
+        <header className="w-full py-4 border-b bg-blue-100">
+          <h1 className="text-center text-2xl font-bold tracking-tight text-primary">
+            DestinyTripAI
+          </h1>
+        </header>
+        <div className="flex-1">{children}</div>
+      </body>
     </html>
   );
 }
