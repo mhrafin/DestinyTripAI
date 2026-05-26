@@ -77,7 +77,7 @@ class ItineraryService:
 
         instruction = (
             "You are an expert travel planner. Given a traveler profile, generate a detailed, personalized trip plan.\n"
-            f"Total trip cost must not exceed {questionnaire.budget} {questionnaire.currency} including estimated costs for flights, accommodations, activities, and meals.\n"
+            f"Total trip cost must not exceed {questionnaire.budget} including estimated costs for flights, accommodations, activities, and meals.\n"
             f"{'Destination can be anywhere in the world.' if questionnaire.abroad_trip_flex else 'Destination must be within the same country as departure city.'}\n"
             f"Climate must match preference: {questionnaire.climate_preference}.\n"
             f"All activities and recommendations must align with {questionnaire.travel_style} travel style.\n"
@@ -90,7 +90,7 @@ class ItineraryService:
             f"Travel Style: {questionnaire.travel_style}\n"
             f"Interests: {interests}\n"
             f"Duration: {questionnaire.duration} days\n"
-            f"Budget: {questionnaire.budget} {questionnaire.currency}\n"
+            f"Budget: {questionnaire.budget}"
             f"Climate Preference: {questionnaire.climate_preference}\n"
             f"Departure City: {questionnaire.departure_city}\n"
             f"Open to International Travel: {'Yes' if questionnaire.abroad_trip_flex else 'No, domestic only'}\n"

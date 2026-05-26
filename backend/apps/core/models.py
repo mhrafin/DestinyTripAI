@@ -22,12 +22,10 @@ class Questionnaire(models.Model):
     )
     interests = models.ManyToManyField(Interest)
     duration = models.IntegerField(help_text="Duration of the trip in days")
-    budget = models.DecimalField(
-        max_digits=10, decimal_places=2, help_text="Budget for the trip"
+    budget = models.CharField(
+        max_length=10, help_text="Budget for the trip in user's currency"
     )
-    currency = models.CharField(
-        max_length=10, default="USD", help_text="Currency for the budget"
-    )
+
     climate_preference = models.CharField(
         max_length=255,
         choices=[
@@ -35,6 +33,7 @@ class Questionnaire(models.Model):
             ("temperate", "Temperate"),
             ("cold", "Cold"),
             ("arid", "Arid"),
+            ("mediterranean", "Mediterranean"),
             ("any", "Any / Surprise me!"),
         ],
     )
