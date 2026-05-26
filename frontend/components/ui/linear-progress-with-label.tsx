@@ -11,9 +11,9 @@ export function LinearProgressWithLabelAndValue(
   const progressId = React.useId();
   return (
     <div>
-      <Typography id={progressId} variant="body2" color="text.secondary">
+      {/* <Typography id={progressId} variant="body2" color="text.secondary">
         Uploading photos…
-      </Typography>
+      </Typography> */}
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Box sx={{ width: "100%", mr: 1 }}>
           <LinearProgress
