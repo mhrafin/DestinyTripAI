@@ -1,3 +1,4 @@
+"use client";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
@@ -12,6 +13,7 @@ import { StepThree } from "./StepThree";
 import { StepFour } from "./StepFour";
 import { LinearProgressWithLabelAndValue } from "../ui/linear-progress-with-label";
 import React from "react";
+import { submitQuestionnaire } from "@/app/action/questionnaire";
 
 export function QuestionnaireForm() {
   const [progress, setProgress] = React.useState(0);
@@ -66,9 +68,16 @@ export function QuestionnaireForm() {
     const fieldsToValidate = stepFields[step as keyof typeof stepFields];
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log("Final Data:", data);
     setStep((s) => s + 1);
+    try {
+      const result = await submitQuestionnaire(data);
+      console.log("Backend Success:", result);
+      // Maybe move step 6 (done) or handle DRF response here
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const onError = (errors: any) => {
@@ -81,7 +90,11 @@ export function QuestionnaireForm() {
         {step === 2 && <StepTwo />}
         {step === 3 && <StepThree />}
         {step === 4 && <StepFour />}
-        {step === 5 && <LinearProgressWithLabelAndValue value={progress} />}
+        {step === 5 && (
+          <div className="mx-auto  h-screen max-w-2xl ">
+            <LinearProgressWithLabelAndValue value={progress} />
+          </div>
+        )}
 
         {/* Render Footer Buttons based on step */}
         {step < 5 && (
