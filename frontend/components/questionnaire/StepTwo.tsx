@@ -101,14 +101,14 @@ export function StepTwo() {
             <InterestButton
               isSelected={selectedInterests.includes(6)}
               onClick={() => handleToggle(6)}
-              icon={<Volleyball />}
-              label={"Beach"}
+              icon={<Binoculars />}
+              label={"Nature"}
             />
             <InterestButton
               isSelected={selectedInterests.includes(7)}
               onClick={() => handleToggle(7)}
-              icon={<Binoculars />}
-              label={"Nature"}
+              icon={<Volleyball />}
+              label={"Beach"}
             />
             <InterestButton
               isSelected={selectedInterests.includes(8)}
