@@ -3,7 +3,7 @@ import os
 
 from dotenv import load_dotenv
 from openai import OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from .models import Questionnaire
 
@@ -20,16 +20,26 @@ class Activity(BaseModel):
 
 class Itinerary(BaseModel):
     day: int
+    day_title: str
+    day_short_description: str = Field(
+        max_length=100, description="A brief summary of the day's activities"
+    )
     activities: list[Activity]
-    cost: float
+    cost: str = Field(
+        description="Estimated cost for the day's activities in user's currency"
+    )
 
 
 class Destination(BaseModel):
-    name: str
-    country: str
+    location: str = Field(
+        description="The recommended destination for the trip, including city and country"
+    )
     match_reason: str
     top_attractions: list[str]
-    description: str
+    description: str = Field(
+        min_length=200,
+        description="A detailed description of the destination",
+    )
     itinerary: list[Itinerary]
 
 
