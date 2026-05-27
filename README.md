@@ -43,7 +43,7 @@ python manage.py runserver
 
 Create a `.env.local` file in the `frontend` directory with the following variable:
 ```env
-PIXELS_API_KEY=your_pexels_api_key
+PEXELS_API_KEY=your_pexels_api_key
 ```
 
 ```bash
