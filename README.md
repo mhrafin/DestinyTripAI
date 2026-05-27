@@ -10,7 +10,18 @@ I love traveling, but I spend too much time researching where to go and what to 
 
 ## 🚀 Quick Start
 
+### Prerequisites
+
+Before you begin, you will need API keys for the AI and image generation features:
+- **OpenAI API Key**: Used by the backend to generate the travel itineraries. You can get one at [OpenAI](https://platform.openai.com/).
+- **Pexels API Key**: Used by the frontend to fetch beautiful images for your destinations. You can get one at [Pexels](https://www.pexels.com/api/).
+
 ### 1. Start the Backend
+
+Create a `.env` file in the `backend` directory with the following variable:
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
 
 ```bash
 cd backend
@@ -22,6 +33,11 @@ python manage.py runserver
 ```
 
 ### 2. Start the Frontend
+
+Create a `.env.local` file in the `frontend` directory with the following variable:
+```env
+PIXELS_API_KEY=your_pexels_api_key
+```
 
 ```bash
 cd frontend
