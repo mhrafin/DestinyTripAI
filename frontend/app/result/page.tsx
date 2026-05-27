@@ -15,7 +15,7 @@ async function getRelatedImage(query: string) {
     `https://api.pexels.com/v1/search?query=${query}&per_page=1`,
     {
       method: "GET",
-      headers: { Authorization: `${process.env.PIXELS_API_KEY}` },
+      headers: { Authorization: `${process.env.PEXELS_API_KEY}` },
     },
   );
 
@@ -113,7 +113,7 @@ async function getCityImageSrc(query: string) {
     `https://api.pexels.com/v1/search?query=${query}&per_page=1`,
     {
       method: "GET",
-      headers: { Authorization: `${process.env.PIXELS_API_KEY}` },
+      headers: { Authorization: `${process.env.PEXELS_API_KEY}` },
     },
   );
 
@@ -134,7 +134,8 @@ export default async function ResultPage({
 
   let tripData: any = null;
 
-  const fallbackData = "N4IglgJiBcDMAsAaEA7AhgWwKYxAJzQDMByAZwAJSBXDbPcgFzzAAcRkm0A3LAGwH1SDAJ68c0EGgg8UDKnhzII8tAzAB7FDFjIARlQgBzLA1wBGAKwAGG+QBCAEQAq7EAGNeYDKqz8WCwiwFFDdxEAYsDBYgn1cILBY0PDkFfjcwEVwHAAs0AGs0VzcFHwh+VVwAJitKgDYAWisLerqnM3g4AE5oKwAOADoAdngrWrNBgC1XNF08dSl+JlZ+QjEADxhCNF5SLGQwWSCsIVIYAG1KxB1axE6AXX21FBi8YRhQXnU3VQ0tCQBlUTZEyIexoFCGXhSY7ZcgACn+Cki4MM23IADJyAAZNAAdzQblyBHISSwaAAlK5vAxCfwSqRNLgnJFogQIvVPHksOQ3JoIBlfhQDuRcQcIvRhYDeMCGIBMAgo2TAvF45AUhl+5H86i4kG5vPUvFBvIwhHUyRmYhFZIYwIl8TRpvoUhkKW5nB4YjwpH65CcwJJJXI6kIgS95EVeQOhnIwpx+MJSTQ5AAcj9NGiAApJPKgrBrRIoUhgHiMMnkVF4eKF0Gi3gQTyBShgQzZJ6GUig8EQVXFoIHbmkULPV6d5UijKKlAknnqKIEhjkWD1CBoYTkCCz45qNwxp4vNeEOYYcg5fJofquBjqFjlBicNxqTSnaBnEBxglEpOpx-oFVZvB5K4ACyUi5LoLDyNi+TcgiSLeBC2yUsgiJYMiCEqsySYAOJJFWFBwiBEDZOo4GQZh5A4ZWWAoEhIAAEqqEkhhUCq-z4lE5AAGJmlurgAFJEJ8ELwkImjcswPD0Fw2xiMIlIPCA8SDswLA-kyioUEuK5rs61GupqUJTkO4oUJo5BSjK8ozgaQThkqvD1LyVCyK85B5qyYDUaEHYzhgugHFG5COludlcj5tb1mAjb4jSk6GKCLBgA+8jHAAjlQbplhWeGdig3YQAQ1JJT2knkIZECDmg0TeuQACSC5CKuFD6EYJj1Ienl5bwB5mtOp4FOuCRJK6uZRLkRYAF7HKFUagugI3jnWDZ7CSeXTleVCEkGhDkCgzatstjDZHMVAtqqfBoGsWDdlgMhRhQqilkmxFULspn0J83wqt8gTeq4ArDkkbwvqA2kwGYSirosGRiFkuQDVe5lAiY0C+mWTgEEqFCYtxChCL6CiAZDwiCMRyT8EpxSsGpEgY9wfCMOoSPSiClAmAwlpikzSYtcYDUMKuub5p8CjkIRxGkfQ5GUVWuU3X52ZBlO4JuXdELIMg87FgKxznKA6DYHDZ6M8zMrkPopwcF4YRAWae0QnExxU6pvy4Mmmj1AAggAwgA9LsGBgPUpBiAktkW0FR4nvDSaIxZJg+g4Kg-iSLBamsPq1IAyAS9OG6jyH9AC+iD65gYTe8Cbh5PUwqPbzJjlhlQgvbsl7W7gnuEOKKDqIyShOypNMgP87Oc7I3PKyGZorrolrMVuLfcs8SRHdy8cML7KFoaiKqkueIDF6XhsSOLJEQVLZYy9RIrbET4TtxInfd73Wj98p1OuwCTAGiqNonWdNpuTuXBEWEsp9JZPTco1CIABuTUxFEbXhYGaOQe01DTUwJoaMEQkxzFxEXEuqAy64HfAmYk35fiZkVhGRQ99j4gAAKJq0MI7d+LtGQSCwlQXU3Zgr4yYFgPI8JKhZ1gHnAu5ITakGQQubw3x0oYLWuoQB9AIqHVFDaacn00TMV1BeQ+RD6HkWytfPaLYFzuT7F5Whah6HJn2qYN+zsh50QumsEkC5Y5lkXkGeg3woiEDAKLXYcgWDjk0Z4cxlB0BVwemtbRKoMCvSSvohSvIhAdzTnMNYXgfDdUXIgWothHAuAMWDaAlxFJQzUBzMIAB1JUkVGyYjor2egDhVyowYgLPAzEVSYgEqsLBcQoakDJgwCmA8P4cJAHYeYC5mDxCOv-WE3SmIsXMuxMJuMQpdkoEOYqgyhLRkVMqIsSydRYHweE2EElbLLQvJrB82t0HPjOEfMIazekbLYpgbZPF8a6HmT2eIbd6G2zwPbFhTjB6f1mcCvMbgC4aj-vnAB-pSBbKCgChgcC1FRW5Hs-ylZDq13IM5MACiSTpR+DuLA6ThBCEiPowhBswh00LMg5IJsjlYIxCVWylzcTILFJbOhYQn5BB7n3RSUz2F-BAAANTAEWBcgDzbT1snvG5YssAtm2KuNAoIhBzDHNsPl6rRLPGDgI3EU47l4F0OCPIpA4HUQAFbqDXDg1a3ZSAxJdR4sqXw0SNTOSyj5uB148gyGuMxB0CXkF9jyIgNiH4gHseY1hzi4VMOooFHUqqTZJgSSmxsvUFBQiut2JJRYdzSOUdip0wbcT1C5HGhxh1LHMGsak5A6TTCPyyeoHJ1I+Brh0L0YpzgD6EPKToKpJMamw1ppfXC1EKAQqhfy-qSZXEpFfou0mKDJlsKHp7cselLQYDtoFXQa5wHnyglyc2WBgrhjJPyYSTqq4m13Y8yQzydSvL1oYm2oEz6QRxC+k1P8k2QJMVOFgCD1CGAIMht4VtwW3odjC6ZCqMxklCIQDZ+JeBCKSPnNa6qoRchrBOHkuQQjTURsh5RqH0OwktfIE6eVAo+q3D4AhkaJC7vOge82r0wUSq7lKl+2bYUzLsK9c2BIhGI13XApIdyYxTnVbdfNEI+3uHUBkod6dckRHyRDIpVh7AzsLncQuhcgA";
+  const fallbackData =
+    "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-vnAB-pSBbKCgChgcC1FRW5Hs-ylZDq13IM5MACiSTpR+DuLA6ThBCEiPowhBswh00LMg5IJsjlYIxCVWylzcTILFJbOhYQn5BB7n3RSUz2F-BAAANTAEWBcgDzbT1snvG5YssAtm2KuNAoIhBzDHNsPl6rRLPGDgI3EU47l4F0OCPIpA4HUQAFbqDXDg1a3ZSAxJdR4sqXw0SNTOSyj5uB148gyGuMxB0CXkF9jyIgNiH4gHseY1hzi4VMOooFHUqqTZJgSSmxsvUFBQiut2JJRYdzSOUdip0wbcT1C5HGhxh1LHMGsak5A6TTCPyyeoHJ1I+Brh0L0YpzgD6EPKToKpJMamw1ppfXC1EKAQqhfy-qSZXEpFfou0mKDJlsKHp7cselLQYDtoFXQa5wHnyglyc2WBgrhjJPyYSTqq4m13Y8yQzydSvL1oYm2oEz6QRxC+k1P8k2QJMVOFgCD1CGAIMht4VtwW3odjC6ZCqMxklCIQDZ+JeBCKSPnNa6qoRchrBOHkuQQjTURsh5RqH0OwktfIE6eVAo+q3D4AhkaJC7vOge82r0wUSq7lKl+2bYUzLsK9c2BIhGI13XApIdyYxTnVbdfNEI+3uHUBkod6dckRHyRDIpVh7AzsLncQuhcgA";
   let dataToUse = compressedData || fallbackData;
 
   if (dataToUse) {
@@ -150,11 +151,12 @@ export default async function ResultPage({
         }
       } else {
         if (dataToUse !== fallbackData) {
-           console.error("Failed to decompress data from URL. Using fallback.");
-           const fallbackDecompressed = LZString.decompressFromEncodedURIComponent(fallbackData);
-           if (fallbackDecompressed) {
-              tripData = JSON.parse(fallbackDecompressed);
-           }
+          console.error("Failed to decompress data from URL. Using fallback.");
+          const fallbackDecompressed =
+            LZString.decompressFromEncodedURIComponent(fallbackData);
+          if (fallbackDecompressed) {
+            tripData = JSON.parse(fallbackDecompressed);
+          }
         }
       }
     } catch (err) {
