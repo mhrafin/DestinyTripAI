@@ -1,6 +1,13 @@
+
 # DestinyTrip AI
 
 DestinyTrip AI is an intelligent travel companion that generates custom itineraries using the power of OpenAI.
+
+
+
+
+https://github.com/user-attachments/assets/0c2bf556-ebdf-4114-89b2-ae2551dff38f
+
 
 
 
