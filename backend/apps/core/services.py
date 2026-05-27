@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 from .models import Questionnaire
 
 load_dotenv()
-API_KEY = os.getenv("API_KEY")
+API_KEY = os.getenv("OPENAI_API_KEY")
 logger = logging.getLogger(__name__)
 
 
