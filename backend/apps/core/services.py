@@ -49,7 +49,7 @@ class Destination(BaseModel):
 class ItineraryService:
     def __init__(self):
         # logger.debug("Initializing ItineraryService")
-        self.client = OpenAI(api_key=API_KEY)
+        self.client = OpenAI(api_key=API_KEY, timeout=30.0)
 
     def generate_itinerary(self, questionnaire_id):
         # logger.debug("Generating itinerary for questionnaire_id=%s", questionnaire_id)
