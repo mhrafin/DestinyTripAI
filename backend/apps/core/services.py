@@ -40,8 +40,7 @@ class Destination(BaseModel):
         description="A list of the top 3 attractions at the destination that align with the user's interests and travel style",
     )
     description: str = Field(
-        min_length=300,
-        description="A detailed description of the destination",
+        description="A description of the destination",
     )
     itinerary: list[Itinerary]
 
@@ -65,11 +64,11 @@ class ItineraryService:
         prompt = self._create_prompt(questionnaire)
         # logger.debug("Prompt built for questionnaire_id=%s chars=%s", questionnaire_id, len(prompt))
         response = self.client.responses.parse(
-            model="gpt-5-nano-2025-08-07",
+            model="gpt-4o-mini",
             instructions=prompt[1],
             input=prompt[0],
             text_format=Destination,
-            max_output_tokens=16384,
+            max_output_tokens=4096,
         )
         logger.debug(
             "OpenAI response received for questionnaire_id=%s output_chars=%s",
